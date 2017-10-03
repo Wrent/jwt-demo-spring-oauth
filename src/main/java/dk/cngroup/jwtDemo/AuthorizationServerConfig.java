@@ -2,6 +2,7 @@ package dk.cngroup.jwtDemo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -17,7 +18,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private AuthenticationManager manager;
-
 
     public AuthorizationServerConfig(AuthenticationManager manager) {
         this.manager = manager;
@@ -56,6 +56,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     //handles JWT signing
     @Bean
+    @Primary
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("secret");
